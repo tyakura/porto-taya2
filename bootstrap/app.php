@@ -11,7 +11,15 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        // Exclude API routes dari CSRF — widget.js bisa dipanggil dari domain lain
+        $middleware->validateCsrfTokens(except: [
+            'api/*',
+        ]);
+
+        // Admin auth middleware
+        $middleware->alias([
+            'admin.auth' => \App\Http\Middleware\AdminAuth::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

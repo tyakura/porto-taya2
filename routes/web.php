@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\AdminController;
 
 // Halaman utama — tampilkan demo widget
 Route::get('/', [ChatController::class, 'index']);
@@ -24,4 +25,16 @@ Route::prefix('api')->group(function () {
 
     // Contact form (PRD §5.2, ERD: CONTACT_MESSAGE)
     Route::post('/contact', [ContactController::class, 'store'])->name('api.contact.store');
+});
+
+// ── ADMIN ROUTES ────────────────────────────────────────────────────────────
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/login',  [AdminController::class, 'showLogin'])->name('login');
+    Route::post('/login', [AdminController::class, 'login'])->name('login.post');
+    Route::post('/logout',[AdminController::class, 'logout'])->name('logout');
+
+    // Protected: harus login dulu
+    Route::middleware('admin.auth')->group(function () {
+        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    });
 });

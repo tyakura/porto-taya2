@@ -630,6 +630,20 @@
   overlay.addEventListener('click', closePanel);
   document.getElementById('tayaClose').addEventListener('click', closePanel);
 
+  // ── Triple-click → Admin login ────────────────────────────────────────────
+  let clickCount = 0;
+  let clickTimer = null;
+  handBtn.addEventListener('click', () => {
+    clickCount++;
+    clearTimeout(clickTimer);
+    clickTimer = setTimeout(() => { clickCount = 0; }, 500);
+    if (clickCount >= 3) {
+      clickCount = 0;
+      clearTimeout(clickTimer);
+      window.location.href = '/admin/login';
+    }
+  });
+
   // ── Auto-wave touch devices (PRD §4.2) ────────────────────────────────────
   const icon = handBtn.querySelector('.taya-hand-icon');
   const isTouchDevice = () => window.matchMedia('(hover: none)').matches;

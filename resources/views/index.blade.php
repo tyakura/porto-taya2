@@ -235,39 +235,90 @@
             margin-bottom: 24px;
         }
 
-        .skills-grid {
+        .skills-layout {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            align-items: start;
+        }
+
+        .skills-col {
+            display: flex;
+            flex-direction: column;
             gap: 12px;
         }
 
-        .skill-bar {
+        .skill-card {
             border: var(--border);
             border-radius: var(--radius);
             overflow: hidden;
+            cursor: default;
+            transition: transform 0.15s, box-shadow 0.15s;
         }
 
-        .skill-bar-label {
+        .skill-card:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 4px 4px 0 var(--black);
+        }
+
+        .skill-card-header {
+            padding: 16px 18px;
             display: flex;
             justify-content: space-between;
-            padding: 8px 12px 4px;
-            font-size: 11px;
+            align-items: center;
+        }
+
+        .skill-card-name {
+            font-size: 13px;
             font-weight: 700;
         }
 
-        .skill-bar-track {
-            height: 6px;
-            background: #e0cfc0;
-            margin: 0 12px 10px;
+        .skill-card-pct {
+            font-size: 11px;
+            font-weight: 700;
+            color: #888;
+            border: 1px solid #ccc;
+            padding: 2px 8px;
+            border-radius: 3px;
+            transition: background 0.2s, color 0.2s, border-color 0.2s;
+        }
+
+        .skill-card:hover .skill-card-pct {
+            background: var(--black);
+            color: var(--cream);
+            border-color: var(--black);
+        }
+
+        .skill-card-desc {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.35s ease;
+            border-top: 0px solid #e0d0c0;
+            background: #fdf8f3;
+            padding: 0 18px;
+            font-size: 11px;
+            color: #555;
+            line-height: 1.85;
+        }
+
+        .skill-card:hover .skill-card-desc {
+            max-height: 200px;
+            border-top: 1px solid #e0d0c0;
+            padding: 12px 18px 14px;
+        }
+
+        .skill-card-track {
+            height: 3px;
+            background: #e0d0c0;
+            margin: 0 18px 14px;
             border-radius: 2px;
             overflow: hidden;
         }
 
-        .skill-bar-fill {
+        .skill-card-fill {
             height: 100%;
             background: var(--black);
             border-radius: 2px;
-            transition: width 1s ease;
         }
 
         /* ── PROJECTS ── */
@@ -334,6 +385,81 @@
             border: 1px solid #ccc;
             padding: 2px 7px;
             border-radius: 3px;
+        }
+
+        /* ── PENDIDIKAN CARD ── */
+        .edu-card {
+            border: var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            cursor: default;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .edu-card:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 4px 4px 0 var(--black);
+        }
+
+        .edu-card-header {
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .edu-card-chevron {
+            display: inline-flex;
+            align-items: center;
+            color: #888;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .edu-card-chevron svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .edu-card:hover .edu-card-chevron {
+            transform: rotate(180deg);
+            color: var(--black);
+        }
+
+        .edu-card-desc {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+            border-top: 0px solid #e0d0c0;
+            background: #fdf8f3;
+            padding: 0 20px;
+        }
+
+        .edu-card:hover .edu-card-desc {
+            max-height: 300px;
+            border-top: 1px solid #e0d0c0;
+            padding: 14px 20px 16px;
+        }
+
+        .edu-card-desc-inner {
+            font-size: 11px;
+            color: #555;
+            line-height: 1.9;
+        }
+
+        .edu-card-desc-inner ul {
+            margin-top: 6px;
+            padding-left: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
         }
 
         /* ── CONTACT SECTION ── */
@@ -507,27 +633,66 @@
     <!-- SKILLS -->
     <section class="section" aria-labelledby="skillsTitle">
         <div class="section-title" id="skillsTitle">Skills &amp; Tools</div>
-        <div class="skills-grid">
-            <div class="skill-bar">
-                <div class="skill-bar-label"><span>HTML5</span><span>90%</span></div>
-                <div class="skill-bar-track"><div class="skill-bar-fill" style="width:90%"></div></div>
+        <div class="skills-layout">
+
+            <!-- Kolom kiri: 3 skill -->
+            <div class="skills-col">
+                <div class="skill-card">
+                    <div class="skill-card-header">
+                        <span class="skill-card-name">HTML5</span>
+                        <span class="skill-card-pct">90%</span>
+                    </div>
+                    <div class="skill-card-track"><div class="skill-card-fill" style="width:90%"></div></div>
+                    <div class="skill-card-desc">
+                        Fondasi utama dalam membuat struktur halaman web. Sudah terbiasa pakai semantic HTML, form, tabel, dan aksesibilitas dasar.
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card-header">
+                        <span class="skill-card-name">Desain Grafis</span>
+                        <span class="skill-card-pct">89%</span>
+                    </div>
+                    <div class="skill-card-track"><div class="skill-card-fill" style="width:89%"></div></div>
+                    <div class="skill-card-desc">
+                        Membuat aset visual, layout, dan ilustrasi menggunakan Figma dan tools desain lainnya. Suka eksplorasi tipografi dan komposisi warna.
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card-header">
+                        <span class="skill-card-name">PHP</span>
+                        <span class="skill-card-pct">70%</span>
+                    </div>
+                    <div class="skill-card-track"><div class="skill-card-fill" style="width:70%"></div></div>
+                    <div class="skill-card-desc">
+                        Backend web development dengan PHP murni dan Laravel. Sudah bisa CRUD, routing, validasi, dan koneksi database.
+                    </div>
+                </div>
             </div>
-            <div class="skill-bar">
-                <div class="skill-bar-label"><span>Desain Grafis</span><span>89%</span></div>
-                <div class="skill-bar-track"><div class="skill-bar-fill" style="width:89%"></div></div>
+
+            <!-- Kolom kanan: 2 skill -->
+            <div class="skills-col">
+                <div class="skill-card">
+                    <div class="skill-card-header">
+                        <span class="skill-card-name">JavaScript</span>
+                        <span class="skill-card-pct">60%</span>
+                    </div>
+                    <div class="skill-card-track"><div class="skill-card-fill" style="width:60%"></div></div>
+                    <div class="skill-card-desc">
+                        Interaksi dinamis di browser, fetch API, dan logika frontend. Mulai menjelajahi React dan Next.js untuk proyek yang lebih kompleks.
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card-header">
+                        <span class="skill-card-name">CSS / Tailwind</span>
+                        <span class="skill-card-pct">50%</span>
+                    </div>
+                    <div class="skill-card-track"><div class="skill-card-fill" style="width:50%"></div></div>
+                    <div class="skill-card-desc">
+                        Styling responsif dengan CSS murni dan Tailwind CSS. Fokus pada layout Flexbox, Grid, dan animasi ringan untuk UX yang menyenangkan.
+                    </div>
+                </div>
             </div>
-            <div class="skill-bar">
-                <div class="skill-bar-label"><span>PHP</span><span>70%</span></div>
-                <div class="skill-bar-track"><div class="skill-bar-fill" style="width:70%"></div></div>
-            </div>
-            <div class="skill-bar">
-                <div class="skill-bar-label"><span>JavaScript</span><span>60%</span></div>
-                <div class="skill-bar-track"><div class="skill-bar-fill" style="width:60%"></div></div>
-            </div>
-            <div class="skill-bar">
-                <div class="skill-bar-label"><span>CSS / Tailwind</span><span>50%</span></div>
-                <div class="skill-bar-track"><div class="skill-bar-fill" style="width:50%"></div></div>
-            </div>
+
         </div>
 
         <div style="margin-top:24px; display:flex; flex-wrap:wrap; gap:8px;" aria-label="Teknologi yang dipakai">
@@ -623,20 +788,61 @@
     <section class="section" aria-labelledby="eduTitle">
         <div class="section-title" id="eduTitle">Pendidikan</div>
         <div style="display:flex; flex-direction:column; gap:16px;">
-            <div style="border:var(--border); border-radius:var(--radius); padding:16px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-                <div>
-                    <div style="font-weight:700; font-size:13px;">SMK Madinatul Qur'an</div>
-                    <div style="font-size:11px; color:#666; margin-top:2px;">Software Engineering</div>
+
+            <!-- SMK -->
+            <div class="edu-card" role="group" aria-label="SMK Madinatul Qur'an">
+                <div class="edu-card-header">
+                    <div>
+                        <div style="font-weight:700; font-size:13px;">SMK Madinatul Qur'an</div>
+                        <div style="font-size:11px; color:#666; margin-top:2px;">Software Engineering</div>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <span style="font-size:10px; color:#888; border:1px solid #ccc; padding:3px 10px; border-radius:3px;">2022 — 2028</span>
+                        <span class="edu-card-chevron" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                        </span>
+                    </div>
                 </div>
-                <span style="font-size:10px; color:#888; border:1px solid #ccc; padding:3px 10px; border-radius:3px;">2022 — 2028</span>
-            </div>
-            <div style="border:var(--border); border-radius:var(--radius); padding:16px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-                <div>
-                    <div style="font-weight:700; font-size:13px;">SMPIT Rabbaani Islamic School</div>
-                    <div style="font-size:11px; color:#666; margin-top:2px;">SMP Islam</div>
+                <div class="edu-card-desc" aria-hidden="true">
+                    <div class="edu-card-desc-inner">
+                        <strong>Jurusan Software Engineering</strong> — fokus pada pengembangan perangkat lunak, pemrograman, dan teknologi web.
+                        <ul>
+                            <li>Belajar HTML, CSS, JavaScript, PHP, dan konsep dasar pemrograman</li>
+                            <li>Proyek kelompok: membangun aplikasi web dan desain UI/UX</li>
+                            <li>Aktif mengembangkan portfolio pribadi dan proyek freelance</li>
+                            <li>Mendalami framework modern: React, Next.js, Laravel</li>
+                        </ul>
+                    </div>
                 </div>
-                <span style="font-size:10px; color:#888; border:1px solid #ccc; padding:3px 10px; border-radius:3px;">2015 — 2021</span>
             </div>
+
+            <!-- SMPIT -->
+            <div class="edu-card" role="group" aria-label="SMPIT Rabbaani Islamic School">
+                <div class="edu-card-header">
+                    <div>
+                        <div style="font-weight:700; font-size:13px;">SMPIT Rabbaani Islamic School</div>
+                        <div style="font-size:11px; color:#666; margin-top:2px;">SMP Islam</div>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <span style="font-size:10px; color:#888; border:1px solid #ccc; padding:3px 10px; border-radius:3px;">2015 — 2021</span>
+                        <span class="edu-card-chevron" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                        </span>
+                    </div>
+                </div>
+                <div class="edu-card-desc" aria-hidden="true">
+                    <div class="edu-card-desc-inner">
+                        <strong>SMP Islam Terpadu</strong> — pendidikan umum yang dipadukan dengan nilai-nilai islami dan pembentukan karakter.
+                        <ul>
+                            <li>Pendidikan umum berbasis kurikulum nasional</li>
+                            <li>Program tahfidz dan pengembangan karakter islami</li>
+                            <li>Mulai mengenal dunia komputer dan teknologi dasar</li>
+                            <li>Aktif dalam kegiatan ekstrakurikuler dan organisasi sekolah</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
